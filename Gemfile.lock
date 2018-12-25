@@ -1,0 +1,98 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    ast (2.4.0)
+    codebreaker_Shkidchenko (0.1.0)
+    coderay (1.1.2)
+    colorize (0.8.1)
+    concurrent-ruby (1.1.4)
+    diff-lcs (1.3)
+    docile (1.3.1)
+    erubis (2.7.0)
+    fasterer (0.4.1)
+      colorize (~> 0.7)
+      ruby_parser (~> 3.11.0)
+    haml (5.0.4)
+      temple (>= 0.8.0)
+      tilt
+    html2haml (2.2.0)
+      erubis (~> 2.7.0)
+      haml (>= 4.0, < 6)
+      nokogiri (>= 1.6.0)
+      ruby_parser (~> 3.5)
+    i18n (1.3.0)
+      concurrent-ruby (~> 1.0)
+    jaro_winkler (1.5.1)
+    json (2.1.0)
+    method_source (0.9.2)
+    mini_portile2 (2.4.0)
+    nokogiri (1.9.1)
+      mini_portile2 (~> 2.4.0)
+    parallel (1.12.1)
+    parser (2.5.3.0)
+      ast (~> 2.4.0)
+    powerpack (0.1.2)
+    pry (0.12.2)
+      coderay (~> 1.1.0)
+      method_source (~> 0.9.0)
+    rack (2.0.6)
+    rack-test (1.1.0)
+      rack (>= 1.0, < 3)
+    rainbow (3.0.0)
+    rspec (3.8.0)
+      rspec-core (~> 3.8.0)
+      rspec-expectations (~> 3.8.0)
+      rspec-mocks (~> 3.8.0)
+    rspec-core (3.8.0)
+      rspec-support (~> 3.8.0)
+    rspec-expectations (3.8.2)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.8.0)
+    rspec-mocks (3.8.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.8.0)
+    rspec-support (3.8.0)
+    rubocop (0.61.1)
+      jaro_winkler (~> 1.5.1)
+      parallel (~> 1.10)
+      parser (>= 2.5, != 2.5.1.1)
+      powerpack (~> 0.1)
+      rainbow (>= 2.2.2, < 4.0)
+      ruby-progressbar (~> 1.7)
+      unicode-display_width (~> 1.4.0)
+    rubocop-rspec (1.30.1)
+      rubocop (>= 0.60.0)
+    ruby-progressbar (1.10.0)
+    ruby_parser (3.11.0)
+      sexp_processor (~> 4.9)
+    sexp_processor (4.11.0)
+    simplecov (0.16.1)
+      docile (~> 1.1)
+      json (>= 1.8, < 3)
+      simplecov-html (~> 0.10.0)
+    simplecov-html (0.10.2)
+    temple (0.8.0)
+    tilt (2.0.9)
+    unicode-display_width (1.4.1)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  codebreaker_Shkidchenko (~> 0.1.0)
+  fasterer
+  html2haml
+  i18n
+  pry
+  rack
+  rack-test
+  rspec
+  rubocop
+  rubocop-rspec
+  simplecov
+
+RUBY VERSION
+   ruby 2.5.1p57
+
+BUNDLED WITH
+   1.17.2
