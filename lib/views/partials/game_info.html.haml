@@ -5,7 +5,7 @@
       %span.badge.badge-light
         = @act.game.difficulty[:level].capitalize
   .col.text-center.button
-    %button.btn.btn-primary{:disabled => "disabled", :type => "button"}
+    %button.btn.btn-primary.attemps_button{:disabled => "disabled", :type => "button"}
       = I18n.t('game_info.attempts_status')
       %span.badge.badge-light
         = @act.game.attempts

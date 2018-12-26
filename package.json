@@ -1,0 +1,14 @@
+{
+  "name": "rg_web_codebreaker",
+  "version": "1.0.0",
+  "description": "logic_game",
+  "main": "index.js",
+  "repository": "https://github.com/IgorShkidchenko/codebreaker_web-Rack.git",
+  "author": "IgorShkidchenko <igorshkidchenko@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "bootstrap": "4.2.1",
+    "jquery": "1.9.1",
+    "popper.js": "^1.14.6"
+  }
+}
