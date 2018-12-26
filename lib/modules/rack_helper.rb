@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 module RackHelper
+  LAYOUT_PATH = File.expand_path('../views/layouts/layout.html.haml', __dir__)
+
   def session_contain?(request, key)
     request.session.key?(key)
   end
@@ -10,8 +12,21 @@ module RackHelper
   end
 
   def show_page(template)
+    Rack::Response.new(render_layout { render_page_file(template) })
+  end
+
+  def partial(template)
+    render_page_file(template)
+  end
+
+  private
+
+  def render_layout
+    Haml::Engine.new(File.read(LAYOUT_PATH)).render(binding)
+  end
+
+  def render_page_file(template)
     path = File.expand_path("../../views/#{template}.html.haml", __FILE__)
-    page = Haml::Engine.new(File.read(path)).render(binding)
-    Rack::Response.new(page)
+    Haml::Engine.new(File.read(path)).render(binding)
   end
 end

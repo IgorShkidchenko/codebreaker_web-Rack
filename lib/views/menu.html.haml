@@ -1,40 +1,21 @@
-!!!
-%html.mdl-js{:lang => "en"}
-  %head
-    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-    %meta{:content => "width=device-width, initial-scale=1, shrink-to-fit=no", :name => "viewport"}/
-    %link{:href => "/assets/favicon.ico", :rel => "icon"}/
-    %link{:href => "/assets/css/bootstrap.min.css", :rel => "stylesheet"}/
-    %link{:href => "/assets/css/styles.css", :rel => "stylesheet"}/
-    %script{:src => "/assets/js/jquery.min.js"}
-    %script{:src => "/assets/js/bootstrap.min.js"}
-    %title= I18n.t('project.title')
-  %body
-    %section#introduction
-      .container
-        .row.fill-viewport.align-items-center.justify-content-center
-          .col-12.col-md-6
-            .row
-              .col-md-auto
-                %h1.text-white.title= I18n.t('project.name_with_year', year: Time.now.year)
-            .row
-              %p.lead.text-white-70
-                = I18n.t('short_rules')
-            %hr.mb-4/
-            %form{:action => "/registration", :method => "post"}
-              .form-group
-                %label.lead.label{:for => "player_name"}= I18n.t('menu_page.name_form.label_name')
-                %input#player_name.form-control{:autofocus => "", :name => "player_name", :pattern => "^[\\w\\u0400-\\u04ff]{3,20}$", :placeholder => "#{I18n.t('menu_page.name_form.placeholder')}", :required => "", :title => "#{I18n.t('menu_page.name_form.error')}"}/
-              .form-group
-                %label.lead.label{:for => "level"}= I18n.t('menu_page.level_form.label_level')
-                %select.custom-select{:name => "level", :required => ""}
-                  %option{:value => ""}= I18n.t('menu_page.level_form.choose')
-                  %option{:value => "simple"}= I18n.t('menu_page.level_form.simple')
-                  %option{:value => "middle"}= I18n.t('menu_page.level_form.middle')
-                  %option{:value => "hard"}= I18n.t('menu_page.level_form.hard')
-              %hr.mb-4/
-              %button.btn.btn-primary.btn-lg{:type => "submit"}
-                = I18n.t('buttons.start_game')
-              %span.float-right
-                %a.btn.btn-warning.btn-lg{:href => "/rules", :role => "button"}= I18n.t('buttons.rules')
-                %a.btn.btn-success.btn-lg{:href => "/stats", :role => "button"}= I18n.t('buttons.statistics')
+.row
+  %p.lead.text-white-70
+    = I18n.t('short_rules')
+%hr.mb-4/
+%form{:action => "/registration", :method => "post"}
+  .form-group
+    %label.lead.label{:for => "player_name"}= I18n.t('menu_page.name_form.label_name')
+    %input#player_name.form-control{:autofocus => "", :name => "player_name", :pattern => "^[\\w\\u0400-\\u04ff]{3,20}$", :placeholder => "#{I18n.t('menu_page.name_form.placeholder')}", :required => "", :title => "#{I18n.t('menu_page.name_form.error')}"}/
+  .form-group
+    %label.lead.label{:for => "level"}= I18n.t('menu_page.level_form.label_level')
+    %select.custom-select{:name => "level", :required => ""}
+      %option{:value => ""}= I18n.t('menu_page.level_form.choose')
+      %option{:value => "simple"}= I18n.t('menu_page.level_form.simple')
+      %option{:value => "middle"}= I18n.t('menu_page.level_form.middle')
+      %option{:value => "hard"}= I18n.t('menu_page.level_form.hard')
+  %hr.mb-4/
+  %button.btn.btn-primary.btn-lg{:type => "submit"}
+    = I18n.t('buttons.start_game')
+  %span.float-right
+    %a.btn.btn-warning.btn-lg{:href => "/rules", :role => "button"}= I18n.t('buttons.rules')
+    %a.btn.btn-success.btn-lg{:href => "/stats", :role => "button"}= I18n.t('buttons.statistics')

@@ -1,23 +1,2 @@
-!!!
-%html.mdl-js{:lang => "en"}
-  %head
-    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-    %meta{:content => "width=device-width, initial-scale=1, shrink-to-fit=no", :name => "viewport"}/
-    %link{:href => "/assets/favicon.ico", :rel => "icon"}/
-    %link{:href => "/assets/css/bootstrap.min.css", :rel => "stylesheet"}/
-    %link{:href => "/assets/css/styles.css", :rel => "stylesheet"}/
-    %script{:src => "/assets/js/jquery.min.js"}
-    %script{:src => "/assets/js/bootstrap.min.js"}
-    %title= I18n.t('project.title')
-  %body
-    %section#introduction
-      .container
-        .row.fill-viewport.align-items-center.justify-content-center
-          .col-12.col-md-6
-            .row
-              .col-md-auto
-                %h1.text-white.title= I18n.t('project.name_with_year', year: Time.now.year)
-            %center.text-white.font-italic= I18n.t('rules_page_rules')
-            %hr.mb-4/
-            %a.btn.btn-primary.btn-lg{:href => "/", :role => "button"}
-              = I18n.t('buttons.home')
+%center.text-white.font-italic= I18n.t('rules_page_rules')
+= partial(CodebreakerRack::ALL_PARTIALS[:home_button])

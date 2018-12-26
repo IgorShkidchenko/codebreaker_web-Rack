@@ -25,6 +25,12 @@ class CodebreakerRack
     make_guess: '/make_guess'
   }.freeze
 
+  ALL_PARTIALS = {
+    game_info: '/partials/game_info',
+    game_over_buttons: '/partials/game_over_buttons',
+    home_button: '/partials/home_button'
+  }.freeze
+
   ERROR_MSG = 'Not Found'
 
   def self.call(env)

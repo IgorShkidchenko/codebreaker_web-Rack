@@ -1,51 +1,30 @@
-!!!
-%html.mdl-js{lang: "en"}
-  %head
-    %meta{content: "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-    %meta{content: "width=device-width, initial-scale=1, shrink-to-fit=no", name: "viewport"}/
-    %link{href: "/assets/favicon.ico", rel: "icon"}/
-    %link{href: "/assets/css/bootstrap.min.css", rel: "stylesheet"}/
-    %link{href: "/assets/css/styles.css", rel: "stylesheet"}/
-    %script{src: "/assets/js/jquery.min.js"}
-    %script{src: "/assets/js/bootstrap.min.js"}
-    %title= I18n.t('project.title')
-  %body
-    %section#introduction
-      .container
-        .row.fill-viewport.align-items-center.justify-content-center
-          .col-12.col-md-6
-            .row
-              .col-md-auto
-                %h1.text-white.title= I18n.t('project.name_with_year', year: Time.now.year)
-            %p.lead.text-white-70= I18n.t('stats_page.top_of_players')
-            %hr.mb-4/
-            .table-responsive-md.scores
-              %table.table.table-striped.table.table-sm
-                %thead
-                  %tr
-                    %th{scope: "col"}= I18n.t('stats_page.table.number')
-                    %th{scope: "col"}= I18n.t('stats_page.table.name')
-                    %th{scope: "col"}= I18n.t('stats_page.table.level')
-                    %th{scope: "col"}= I18n.t('stats_page.table.attempts')
-                    %th{scope: "col"}= I18n.t('stats_page.table.hints')
-                    %th{scope: "col"}= I18n.t('stats_page.table.date')
-                %tbody
-                  - if show_stats.empty?
-                    %tr
-                      %center= I18n.t('stats_page.empty_db_msg')
-                  - else
-                    - show_stats.each.with_index do |game, index|
-                      %tr
-                        %th{scope: "row"}= index + 1
-                        %td= game[:player_name]
-                        %td= game[:level].capitalize
-                        %td
-                          = game[:left_attempts]
-                          \/#{game[:all_attempts]}
-                        %td
-                          = game[:left_hints]
-                          \/#{game[:all_hints]}
-                        %td= game[:date].strftime("%Y:%m:%d - %H:%M:%S")
-            %hr.mb-4/
-            %a.btn.btn-primary.btn-lg{href: "/", role: "button"}
-              = I18n.t('buttons.home')
+%p.lead.text-white-70= I18n.t('stats_page.top_of_players')
+%hr.mb-4/
+.table-responsive-md.scores
+  %table.table.table-striped.table.table-sm
+    %thead
+      %tr
+        %th{scope: "col"}= I18n.t('stats_page.table.number')
+        %th{scope: "col"}= I18n.t('stats_page.table.name')
+        %th{scope: "col"}= I18n.t('stats_page.table.level')
+        %th{scope: "col"}= I18n.t('stats_page.table.attempts')
+        %th{scope: "col"}= I18n.t('stats_page.table.hints')
+        %th{scope: "col"}= I18n.t('stats_page.table.date')
+    %tbody
+      - if show_stats.empty?
+        %tr
+          %center= I18n.t('stats_page.empty_db_msg')
+      - else
+        - show_stats.each.with_index do |game, index|
+          %tr
+            %th{scope: "row"}= index + 1
+            %td= game[:player_name]
+            %td= game[:level].capitalize
+            %td
+              = game[:left_attempts]
+              \/#{game[:all_attempts]}
+            %td
+              = game[:left_hints]
+              \/#{game[:all_hints]}
+            %td= game[:date].strftime("%Y:%m:%d - %H:%M:%S")
+= partial(CodebreakerRack::ALL_PARTIALS[:home_button])

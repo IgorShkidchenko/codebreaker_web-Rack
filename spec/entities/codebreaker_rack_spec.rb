@@ -12,20 +12,11 @@ RSpec.describe CodebreakerRack do
   let(:game) { Codebreaker::Game.new(difficulty_double, user_double) }
 
   let(:valid_name) { 'a' * Codebreaker::User::VALID_NAME_SIZE.min }
-  let(:invalid_name) { 'a' * (Codebreaker::User::VALID_NAME_SIZE.min - 1) }
-
   let(:wrong_guess) { '1234' }
-  let(:invalid_guess) { wrong_guess.slice(0, 2) }
-  let(:right_guess) { '1666' }
   let(:valid_code) { [1, 6, 6, 6] }
 
-  let(:unknow_url) { '/unknown_url' }
-  let(:path_to_test_db) { 'spec/fixtures/test_database.yml' }
-  let(:show_hint_button_with_disabled_css_class) do
-    "<a class='btn btn-danger btn-lg float-right disabled' href='/show_hint' role='button'>"
-  end
-
   describe 'when open unknown url receive 404 error' do
+    let(:unknow_url) { '/unknown_url' }
     let(:response) { get unknow_url }
 
     it { expect(response.status).to eq 404 }
@@ -74,9 +65,11 @@ RSpec.describe CodebreakerRack do
     end
 
     context 'when invalid data must to be redirected to index with nil game session' do
+      let(:invalid_name) { 'a' * (Codebreaker::User::VALID_NAME_SIZE.min - 1) }
+      let(:invalid_level) { difficulty_double.level[:level].succ }
       let(:response) do
         post CodebreakerRack::URLS[:registration], player_name: invalid_name,
-                                                   level: difficulty_double.level[:level].succ
+                                                   level: invalid_level
       end
 
       before do
@@ -128,6 +121,9 @@ RSpec.describe CodebreakerRack do
 
   describe 'when open show hint with active game phase must to be redirected to game page' do
     let(:response) { get CodebreakerRack::URLS[:show_hint] }
+    let(:show_hint_button_with_disabled_css_class) do
+      "<a class='btn btn-danger btn-lg float-right disabled' href='/show_hint' role='button'>"
+    end
 
     before do
       env 'rack.session', game: game
@@ -144,6 +140,10 @@ RSpec.describe CodebreakerRack do
   end
 
   describe "when use last hint 'show_hint' button must be disabled" do
+    let(:show_hint_button_with_disabled_css_class) do
+      "<a class='btn btn-danger btn-lg float-right disabled' href='/show_hint' role='button'>"
+    end
+
     before { env 'rack.session', game: game }
 
     it do
@@ -174,6 +174,7 @@ RSpec.describe CodebreakerRack do
     end
 
     context 'with invalid guess result must to be nil' do
+      let(:invalid_guess) { wrong_guess.slice(0, 2) }
       let(:response) { post CodebreakerRack::URLS[:make_guess], guess: invalid_guess }
 
       before do
@@ -206,6 +207,8 @@ RSpec.describe CodebreakerRack do
   end
 
   describe 'when win must to be redirected on win page with deleting game session and adding winner to db' do
+    let(:right_guess) { '1666' }
+    let(:path_to_test_db) { 'spec/fixtures/test_database.yml' }
     let(:response) { post CodebreakerRack::URLS[:make_guess], guess: right_guess }
 
     before do

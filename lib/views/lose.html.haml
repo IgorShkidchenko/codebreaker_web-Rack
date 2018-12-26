@@ -1,50 +1,12 @@
-!!!
-%html.mdl-js{lang: "en"}
-  %head
-    %meta{content: "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-    %meta{content: "width=device-width, initial-scale=1, shrink-to-fit=no", name: "viewport"}/
-    %link{href: "/assets/favicon.ico", rel: "icon"}/
-    %link{href: "/assets/css/bootstrap.min.css", rel: "stylesheet"}/
-    %link{href: "/assets/css/styles.css", rel: "stylesheet"}/
-    %script{src: "/assets/js/jquery.min.js"}
-    %script{src: "/assets/js/bootstrap.min.js"}
-    %title= I18n.t('project.title')
-  %body
-    %section#introduction
-      .container
-        .row.fill-viewport.align-items-center.justify-content-center
-          .col-12.col-md-6
-            .row
-              .col-md-auto
-                %h1.text-white.title.inline-block= I18n.t('project.name_with_year', year: Time.now.year)
-            .row
-              .col.button
-                %button.btn.btn-primary{disabled: "disabled", type: "button"}
-                  = I18n.t('game_info.level_indicator')
-                  %span.badge.badge-light
-                    = @act.game.difficulty[:level].capitalize
-                %button.btn.btn-primary{disabled: "disabled", type: "button"}
-                  = I18n.t('game_info.attempts_status')
-                  %span.badge.badge-light
-                    0/#{@act.game.difficulty[:attempts]}
-                %button.btn.btn-primary{disabled: "disabled", type: "button"}
-                  = I18n.t('game_info.hints_status')
-                  %span.badge.badge-light
-                    = @act.game.hints
-                    \/#{@act.game.difficulty[:hints]}
-            %hr.mb-4/
-            .row
-              .text-center
-                .text-center
-                  %h3.text-white
-                    = I18n.t('lose_page.lose_message', name: @act.game.player_name)
-                  %h4.text-white
-                    = I18n.t('lose_page.show_code')
-                    %strong= @act.game.breaker_numbers.join(', ')
-                %img.img-fluid{alt: "#{I18n.t('lose_page.alt_lose_game')}", src: "/assets/images/lost.gif"}/
-            %hr.mb-4/
-            %a.btn.btn-primary.btn-lg{href: "/", role: "button"}
-              = I18n.t('buttons.play_again')
-            %a.btn.btn-success.btn-lg.float-right{href: "/stats", role: "button"}
-              = I18n.t('buttons.statistics')
+= partial(CodebreakerRack::ALL_PARTIALS[:game_info])
+.row
+  .text-center
+    .text-center
+      %h3.text-white
+        = I18n.t('lose_page.lose_message', name: @act.game.player_name)
+      %h4.text-white
+        = I18n.t('lose_page.show_code')
+        %strong= @act.game.breaker_numbers.join(', ')
+    %img.img-fluid{alt: "#{I18n.t('lose_page.alt_lose_game')}", src: "/assets/images/lost.gif"}/
+= partial(CodebreakerRack::ALL_PARTIALS[:game_over_buttons])
 -session_destroy
