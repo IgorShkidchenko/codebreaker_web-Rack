@@ -6,6 +6,9 @@
   "repository": "https://github.com/IgorShkidchenko/codebreaker_web-Rack.git",
   "author": "IgorShkidchenko <igorshkidchenko@gmail.com>",
   "license": "MIT",
+  "engines": {
+    "yarn": ">= 0.25.2"
+  },
   "devDependencies": {
     "bootstrap": "4.2.1",
     "jquery": "1.9.1",
