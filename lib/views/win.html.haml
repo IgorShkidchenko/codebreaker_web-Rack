@@ -1,9 +1,9 @@
-= partial(CodebreakerRack::ALL_PARTIALS[:game_info])
+= partial('/partials/game_info')
 .row
   .text-center
     .text-center
       %h3.text-white
         = I18n.t('win_page.congratulations', name: @act.game.player_name)
     %img.img-fluid{:alt => "#{I18n.t('win_page.alt_won_game')}", :src => "/public/assets/images/won.gif"}/
-= partial(CodebreakerRack::ALL_PARTIALS[:game_over_buttons])
+= partial('/partials/game_over_buttons')
 -session_destroy

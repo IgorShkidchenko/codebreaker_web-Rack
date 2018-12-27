@@ -1,4 +1,4 @@
-= partial(CodebreakerRack::ALL_PARTIALS[:game_info])
+= partial('/partials/game_info')
 .row
   .text-center
     .text-center
@@ -8,5 +8,5 @@
         = I18n.t('lose_page.show_code')
         %strong= @act.game.breaker_numbers.join(', ')
     %img.img-fluid{alt: "#{I18n.t('lose_page.alt_lose_game')}", src: "/public/assets/images/lost.gif"}/
-= partial(CodebreakerRack::ALL_PARTIALS[:game_over_buttons])
+= partial('/partials/game_over_buttons')
 -session_destroy

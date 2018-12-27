@@ -25,13 +25,6 @@ class CodebreakerRack
     make_guess: '/make_guess'
   }.freeze
 
-  ALL_PARTIALS = {
-    game_info: '/partials/game_info',
-    game_over_buttons: '/partials/game_over_buttons',
-    home_button: '/partials/home_button',
-    assets: '/partials/assets_load'
-  }.freeze
-
   def self.call(env)
     new(env).response.finish
   end
@@ -46,7 +39,7 @@ class CodebreakerRack
   end
 
   def show_stats
-    load_db.sort_by { |user| [user[:all_attempts], -user[:left_attempts], -user[:left_hints]] }
+    Codebreaker::Representer.sort_db(load_db)
   end
 
   def session_destroy

@@ -2,20 +2,22 @@
   %p.lead.text-white-70
     = I18n.t('short_rules')
 %hr.mb-4/
-%form{:action => "/registration", :method => "post"}
+%form{action: "/registration", method: "post"}
   .form-group
-    %label.lead.label{:for => "player_name"}= I18n.t('menu_page.name_form.label_name')
-    %input#player_name.form-control{:autofocus => "", :name => "player_name", :pattern => "^[\\w\\u0400-\\u04ff]{3,20}$", :placeholder => "#{I18n.t('menu_page.name_form.placeholder')}", :required => "", :title => "#{I18n.t('menu_page.name_form.error')}"}/
+    %label.lead.label{for: "player_name"}= I18n.t('menu_page.name_form.label_name')
+    %input#player_name.form-control{autofocus: "", name: "player_name", pattern: "^[\\w\\u0400-\\u04ff]{3,20}$",
+    placeholder: "#{I18n.t('menu_page.name_form.placeholder')}", required: "",
+    title: "#{I18n.t('menu_page.name_form.error', min: Codebreaker::User::VALID_NAME_SIZE.min, max: Codebreaker::User::VALID_NAME_SIZE.max)}"}/
   .form-group
-    %label.lead.label{:for => "level"}= I18n.t('menu_page.level_form.label_level')
-    %select.custom-select{:name => "level", :required => ""}
-      %option{:value => ""}= I18n.t('menu_page.level_form.choose')
-      %option{:value => "simple"}= I18n.t('menu_page.level_form.simple')
-      %option{:value => "middle"}= I18n.t('menu_page.level_form.middle')
-      %option{:value => "hard"}= I18n.t('menu_page.level_form.hard')
+    %label.lead.label{for: "level"}= I18n.t('menu_page.level_form.label_level')
+    %select.custom-select{name: "level", required: ""}
+      %option{value: ""}= I18n.t('menu_page.level_form.choose')
+      %option{value: "simple"}= I18n.t('menu_page.level_form.simple')
+      %option{value: "middle"}= I18n.t('menu_page.level_form.middle')
+      %option{value: "hard"}= I18n.t('menu_page.level_form.hard')
   %hr.mb-4/
-  %button.btn.btn-primary.btn-lg{:type => "submit"}
+  %button.btn.btn-primary.btn-lg{type: "submit"}
     = I18n.t('buttons.start_game')
   %span.float-right
-    %a.btn.btn-warning.btn-lg{:href => "/rules", :role => "button"}= I18n.t('buttons.rules')
-    %a.btn.btn-success.btn-lg{:href => "/stats", :role => "button"}= I18n.t('buttons.statistics')
+    %a.btn.btn-warning.btn-lg{href: "/rules", role: "button"}= I18n.t('buttons.rules')
+    %a.btn.btn-success.btn-lg{href: "/stats", role: "button"}= I18n.t('buttons.statistics')

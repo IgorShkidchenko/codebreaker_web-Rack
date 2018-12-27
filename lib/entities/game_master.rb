@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class GameMaster
-  attr_reader :game, :result
+  attr_reader :game, :round_result
 
   include Codebreaker::Uploader
   include RackHelper
@@ -19,15 +19,12 @@ class GameMaster
 
   def update_game_data
     @game = @request.session[:game]
-    return unless session_contain?(@request, :result)
-
-    @result = @request.session[:result]
-    fill_empty_space_in_result if @result.size < Codebreaker::Game::CODE_SIZE
+    update_round_result_data if session_contain?(@request, :result)
   end
 
   def registrate_new_game
-    user = Codebreaker::User.new(@request.params['player_name'])
-    difficulty = Codebreaker::Difficulty.find(@request.params['level'])
+    user = registrate_name
+    difficulty = registrate_difficulty
     return redirect_to(CodebreakerRack::URLS[:index]) unless registration_data_valid?(difficulty, user)
 
     @request.session[:game] = Codebreaker::Game.new(difficulty, user)
@@ -40,27 +37,40 @@ class GameMaster
   end
 
   def start_round
-    guess = validate_guess
-    return win if @game.win?(guess)
-    return lose if @game.lose?(guess)
+    validate_guess
+    return win if @game.win?(@guess.as_array_of_numbers)
+    return lose if @game.lose?(@guess.as_array_of_numbers)
 
-    @request.session[:result] = @game.start_round(guess) if validate_guess
+    @request.session[:result] = @game.start_round(@guess.as_array_of_numbers) if validate_guess
     redirect_to(CodebreakerRack::URLS[:game])
   end
 
   private
+
+  def update_round_result_data
+    @round_result = @request.session[:result]
+    fill_empty_space_in_result if @round_result.size < Codebreaker::Game::CODE_SIZE
+  end
+
+  def registrate_name
+    Codebreaker::User.new(@request.params['player_name'])
+  end
+
+  def registrate_difficulty
+    Codebreaker::Difficulty.find(@request.params['level'])
+  end
 
   def registration_data_valid?(difficulty, user)
     user.valid? && difficulty
   end
 
   def validate_guess
-    guess = Codebreaker::Guess.new(@request.params['guess'])
-    guess.as_array_of_numbers if guess.valid?
+    @guess = Codebreaker::Guess.new(@request.params['guess'])
+    @guess.as_array_of_numbers if @guess.valid?
   end
 
   def fill_empty_space_in_result
-    @result += Array.new(Codebreaker::Game::CODE_SIZE - @result.size) { GUESS_MARKS[:danger] }
+    @round_result += Array.new(Codebreaker::Game::CODE_SIZE - @round_result.size) { GUESS_MARKS[:danger] }
   end
 
   def win

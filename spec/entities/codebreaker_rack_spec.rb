@@ -80,7 +80,11 @@ RSpec.describe CodebreakerRack do
       it { expect(last_request.session[:game]).to eq nil }
       it { expect(response).to be_redirect }
       it { expect(last_response).to be_ok }
-      it { expect(last_response.body).to include I18n.t('menu_page.name_form.error') }
+      it {
+        expect(last_response.body).to include I18n.t('menu_page.name_form.error',
+                                                     min: Codebreaker::User::VALID_NAME_SIZE.min,
+                                                     max: Codebreaker::User::VALID_NAME_SIZE.max)
+      }
     end
   end
 
@@ -121,9 +125,6 @@ RSpec.describe CodebreakerRack do
 
   describe 'when open show hint with active game phase must to be redirected to game page' do
     let(:response) { get CodebreakerRack::URLS[:show_hint] }
-    let(:show_hint_button_with_disabled_css_class) do
-      "<a class='btn btn-danger btn-lg float-right disabled' href='/show_hint' role='button'>"
-    end
 
     before do
       env 'rack.session', game: game
@@ -136,23 +137,6 @@ RSpec.describe CodebreakerRack do
     it { expect(last_request.session[:game].showed_hints).not_to eq nil }
     it { expect(last_response.body).to include I18n.t('game_page.hello', name: valid_name) }
     it { expect(last_response.body).to include last_request.session[:game].showed_hints.join }
-    it { expect(last_response.body).not_to include show_hint_button_with_disabled_css_class }
-  end
-
-  describe "when use last hint 'show_hint' button must be disabled" do
-    let(:show_hint_button_with_disabled_css_class) do
-      "<a class='btn btn-danger btn-lg float-right disabled' href='/show_hint' role='button'>"
-    end
-
-    before { env 'rack.session', game: game }
-
-    it do
-      game.hints.times do
-        get CodebreakerRack::URLS[:show_hint]
-        follow_redirect!
-      end
-      expect(last_response.body).to include show_hint_button_with_disabled_css_class
-    end
   end
 
   describe 'when post make guess with active game phase must to be redirected to game page' do
@@ -184,7 +168,12 @@ RSpec.describe CodebreakerRack do
 
       it { expect(response).to be_redirect }
       it { expect(last_response).to be_ok }
-      it { expect(last_response.body).to include I18n.t('game_page.guess_form.error') }
+      it {
+        expect(last_response.body).to include I18n.t('game_page.guess_form.error',
+                                                     min: Codebreaker::Game::INCLUDE_IN_GAME_NUMBERS.min,
+                                                     max: Codebreaker::Game::INCLUDE_IN_GAME_NUMBERS.max,
+                                                     size: Codebreaker::Game::CODE_SIZE)
+      }
       it { expect(last_request.session[:result]).to eq nil }
     end
   end

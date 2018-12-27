@@ -57,7 +57,7 @@ en:
     name_form:
       label_name: "Player's name:"
       placeholder: Your name
-      error: Name must be from 3 to 20 chars
+      error: Name must be from %{min} to %{max} chars
     level_form:
       label_level: 'Game level:'
       choose: Choose game level...
@@ -68,6 +68,6 @@ en:
   game_page:
     hello: "Hello, %{name}"
     guess_form:
-      error: Guess must be 4-digit numbers from 1 to 6
+      error: Guess must be %{size}-digit numbers from %{min} to %{max}
 
   error_404: Sorry, the page are you looking for not available
