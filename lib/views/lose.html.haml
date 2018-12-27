@@ -7,6 +7,6 @@
       %h4.text-white
         = I18n.t('lose_page.show_code')
         %strong= @act.game.breaker_numbers.join(', ')
-    %img.img-fluid{alt: "#{I18n.t('lose_page.alt_lose_game')}", src: "/assets/images/lost.gif"}/
+    %img.img-fluid{alt: "#{I18n.t('lose_page.alt_lose_game')}", src: "/public/assets/images/lost.gif"}/
 = partial(CodebreakerRack::ALL_PARTIALS[:game_over_buttons])
 -session_destroy

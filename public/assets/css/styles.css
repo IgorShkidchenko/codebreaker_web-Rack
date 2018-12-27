@@ -72,3 +72,7 @@ input::-webkit-inner-spin-button {
   pointer-events: none;
   cursor: default;
 }
+
+.error_404 {
+  margin: 10%;
+}

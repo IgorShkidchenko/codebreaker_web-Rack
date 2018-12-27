@@ -28,10 +28,9 @@ class CodebreakerRack
   ALL_PARTIALS = {
     game_info: '/partials/game_info',
     game_over_buttons: '/partials/game_over_buttons',
-    home_button: '/partials/home_button'
+    home_button: '/partials/home_button',
+    assets: '/partials/assets_load'
   }.freeze
-
-  ERROR_MSG = 'Not Found'
 
   def self.call(env)
     new(env).response.finish
@@ -43,8 +42,6 @@ class CodebreakerRack
   end
 
   def response
-    return Rack::Response.new(ERROR_MSG, 404) unless valid_request?
-
     session_contain?(@request, :game) ? active_game_phase : absent_game_phase
   end
 
@@ -53,9 +50,7 @@ class CodebreakerRack
   end
 
   def session_destroy
-    @request.session[:game] = nil
-    @request.session[:game_over] = nil
-    @request.session[:result] = nil
+    @request.session.clear
   end
 
   private
@@ -84,9 +79,5 @@ class CodebreakerRack
 
   def check_game_over(page)
     session_contain?(@request, :game_over) ? show_page(page) : redirect_to(URLS[:game])
-  end
-
-  def valid_request?
-    URLS.value?(@request.path)
   end
 end

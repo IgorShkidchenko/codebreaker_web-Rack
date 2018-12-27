@@ -4,6 +4,7 @@ require_relative 'autoload'
 
 use Rack::Reloader
 use Rack::Static, urls: ['/public', '/node_modules'], root: './'
+use ValidateRequest
 use Rack::Session::Cookie, key: 'rack.session', secret: 'secret'
 
 run CodebreakerRack

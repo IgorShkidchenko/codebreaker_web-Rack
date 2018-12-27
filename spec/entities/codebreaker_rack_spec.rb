@@ -20,7 +20,7 @@ RSpec.describe CodebreakerRack do
     let(:response) { get unknow_url }
 
     it { expect(response.status).to eq 404 }
-    it { expect(response.body).to include CodebreakerRack::ERROR_MSG }
+    it { expect(response.body).to include I18n.t('error_404') }
   end
 
   describe 'when open allowed pages with absent game phase' do

@@ -69,3 +69,5 @@ en:
     hello: "Hello, %{name}"
     guess_form:
       error: Guess must be 4-digit numbers from 1 to 6
+
+  error_404: Sorry, the page are you looking for not available
