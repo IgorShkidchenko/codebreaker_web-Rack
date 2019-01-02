@@ -1,0 +1,30 @@
+%p.lead.text-white-70= I18n.t('stats_page.top_of_players')
+%hr.mb-4/
+.table-responsive-md.scores
+  %table.table.table-striped.table.table-sm
+    %thead
+      %tr
+        %th{scope: "col"}= I18n.t('stats_page.table.number')
+        %th{scope: "col"}= I18n.t('stats_page.table.name')
+        %th{scope: "col"}= I18n.t('stats_page.table.level')
+        %th{scope: "col"}= I18n.t('stats_page.table.attempts')
+        %th{scope: "col"}= I18n.t('stats_page.table.hints')
+        %th{scope: "col"}= I18n.t('stats_page.table.date')
+    %tbody
+      - if show_stats.empty?
+        %tr
+          %center= I18n.t('stats_page.empty_db_msg')
+      - else
+        - show_stats.each.with_index do |game, index|
+          %tr
+            %th{scope: "row"}= index + 1
+            %td= game[:player_name]
+            %td= game[:level].capitalize
+            %td
+              = game[:left_attempts]
+              \/#{game[:all_attempts]}
+            %td
+              = game[:left_hints]
+              \/#{game[:all_hints]}
+            %td= game[:date].strftime("%Y:%m:%d - %H:%M:%S")
+= partial('/partials/home_button')

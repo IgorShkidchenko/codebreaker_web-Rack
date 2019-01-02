@@ -1,0 +1,22 @@
+%p.lead.text-white-70
+  = I18n.t('game_page.hello', name: @act.game.player_name)
+  = I18n.t('short_rules')
+%hr.mb-4/
+= partial('/partials/game_info')
+%form{action: "/make_guess", method: "post"}
+  .form-group
+    %input.form-control.guess_input{autocomplete: "off", name: "guess", pattern: "^[1-6]{4}$", required: "",
+    title: "#{I18n.t('game_page.guess_form.error', min: Codebreaker::Game::INCLUDE_IN_GAME_NUMBERS.min, max: Codebreaker::Game::INCLUDE_IN_GAME_NUMBERS.max, size: Codebreaker::Game::CODE_SIZE)}"}/
+  .form-group.guess_markers_list
+    #guess_marker
+      - @act.round_result&.each do |guess|
+        %button{class: "btn btn-#{GameMaster::GUESS_MARKS.key(guess)} marks", disabled: "disabled", type: "button"}
+          = guess
+  %hr.mb-4/
+  %button.btn.btn-primary.btn-lg{type: "submit"}
+    = I18n.t('buttons.submit')
+  %a{class: "btn btn-danger btn-lg float-right #{'disabled' if @act.game.hints.zero?}", href: "/show_hint", role: "button"}
+    = I18n.t('buttons.show_hint')
+    - @act.game.showed_hints&.each do |hint|
+      %span.badge.badge-light
+        = hint

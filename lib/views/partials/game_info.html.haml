@@ -1,0 +1,19 @@
+.row
+  .col.button
+    %button.btn.btn-primary{:disabled => "disabled", :type => "button"}
+      = I18n.t('game_info.level_indicator')
+      %span.badge.badge-light
+        = @act.game.difficulty[:level].capitalize
+  .col.text-center.button
+    %button.btn.btn-primary.attemps_button{:disabled => "disabled", :type => "button"}
+      = I18n.t('game_info.attempts_status')
+      %span.badge.badge-light
+        = @act.game.attempts
+        \/#{@act.game.difficulty[:attempts]}
+  .col.button
+    %button.btn.btn-primary.float-right{:disabled => "disabled", :type => "button"}
+      = I18n.t('game_info.hints_status')
+      %span.badge.badge-light
+        = @act.game.hints
+        \/#{@act.game.difficulty[:hints]}
+%hr.mb-4/

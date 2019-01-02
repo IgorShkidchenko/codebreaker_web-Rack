@@ -1,0 +1,6 @@
+= partial('/partials/assets_load')
+.text-center
+  %img.img-fluid.error_404{alt: '404', src: "/public/assets/images/404.png"}
+  %h3.text-primary
+    = I18n.t('error_404')
+  = partial('/partials/home_button')

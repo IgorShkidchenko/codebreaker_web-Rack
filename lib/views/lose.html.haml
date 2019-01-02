@@ -1,0 +1,12 @@
+= partial('/partials/game_info')
+.row
+  .text-center
+    .text-center
+      %h3.text-white
+        = I18n.t('lose_page.lose_message', name: @act.game.player_name)
+      %h4.text-white
+        = I18n.t('lose_page.show_code')
+        %strong= @act.game.breaker_numbers.join(', ')
+    %img.img-fluid{alt: "#{I18n.t('lose_page.alt_lose_game')}", src: "/public/assets/images/lost.gif"}/
+= partial('/partials/game_over_buttons')
+-session_destroy

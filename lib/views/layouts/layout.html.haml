@@ -1,0 +1,14 @@
+!!!
+%html.mdl-js{:lang => "en"}
+  %head
+    = partial('/partials/assets_load')
+    %title= I18n.t('project.title')
+  %body
+    %section#introduction
+      .container
+        .row.fill-viewport.align-items-center.justify-content-center
+          .col-12.col-md-6
+            .row
+              .col-md-auto
+              %h1.text-white.title= I18n.t('project.name_with_year', year: Time.now.year)
+            = yield
